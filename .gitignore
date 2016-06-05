@@ -1,0 +1,58 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+
+/autom4te.cache/
+/config.*
+/install-sh
+/libtool
+/stamp-h?
+/.anjuta/
+/configure
+/ltmain.sh
+/Makefile
+/Makefile.in
+/*.m4
+/depcomp
+/compile
+/missing
+/.deps
+/src/Makefile
+/src/Makefile.in
+/src/.deps
+/src/skalarwelle
+/Debug/
+
+.anjuta_sym_db.db
+skalarwelle.anjuta
+*~
+*.gschema.valid
