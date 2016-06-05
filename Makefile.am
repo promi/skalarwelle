@@ -1,16 +1,9 @@
-## Process this file with automake to produce Makefile.in
-## Created by Anjuta
-
+AUTOMAKE_OPTIONS = foreign
 SUBDIRS = src po
 
 dist_doc_DATA = \
-	README \
-	COPYING \
-	AUTHORS \
-	ChangeLog \
-	INSTALL \
-	NEWS
-
+	README.md \
+	LICENSE
 
 INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
@@ -23,7 +16,6 @@ DISTCLEANFILES = intltool-extract \
 	intltool-merge \
 	intltool-update \
 	po/.intltool-merge-cache
-
 
 # Remove doc directory on uninstall
 uninstall-local:
