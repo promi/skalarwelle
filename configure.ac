@@ -14,9 +14,14 @@ LT_INIT
 
 PKG_CHECK_MODULES(SKALARWELLE, [gtk+-3.0 >= 2.90.3 ])
 
+PKG_CHECK_MODULES(LIBSKALARWELLE, [glib-2.0 gobject-2.0 gio-2.0 libprotobuf-c 
+	opus vorbis vorbisenc shout])
+
+dnl GLIB_GSETTINGS
+
 AC_OUTPUT([
 Makefile
+libskalarwelle/Makefile
 src/Makefile
 po/Makefile.in
-libskalarwelle/Makefile
 ])

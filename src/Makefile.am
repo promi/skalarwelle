@@ -31,5 +31,9 @@ resources.c: resources.xml skalarwelle-main-window.ui
 	glib-compile-resources $(srcdir)/resources.xml --target=$@ \
 	--sourcedir=$(srcdir) --c-name skalarwelle --generate-source
 
+# gsettings_SCHEMAS = com.github.promi.cmumble.gschema.xml
+
+# @GSETTINGS_RULES@
+
 uninstall-local:
 	-rm -r $(pkgdatadir)

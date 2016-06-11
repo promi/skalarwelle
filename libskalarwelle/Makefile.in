@@ -127,13 +127,20 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libskalarwelle_la_LIBADD =
-am_libskalarwelle_la_OBJECTS = libskalarwelle.lo
+am__DEPENDENCIES_1 =
+libskalarwelle_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_libskalarwelle_la_OBJECTS = libskalarwelle_la-libskalarwelle.lo \
+	libskalarwelle_la-Mumble.pb-c.lo libskalarwelle_la-network.lo \
+	libskalarwelle_la-packet_data_stream.lo
 libskalarwelle_la_OBJECTS = $(am_libskalarwelle_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libskalarwelle_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libskalarwelle_la_CFLAGS) $(CFLAGS) \
+	$(libskalarwelle_la_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -248,6 +255,8 @@ LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
+LIBSKALARWELLE_CFLAGS = @LIBSKALARWELLE_CFLAGS@
+LIBSKALARWELLE_LIBS = @LIBSKALARWELLE_LIBS@
 LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -345,12 +354,35 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+AM_CPPFLAGS = \
+	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
+	$(LIBSKALARWELLE_CFLAGS)
+
+AM_CFLAGS = \
+	 -Wall\
+	 -g
+
 lib_LTLIBRARIES = \
 	libskalarwelle.la
 
 libskalarwelle_la_SOURCES = \
-	libskalarwelle.c
+	libskalarwelle.c \
+	Mumble.pb-c.c \
+	Mumble.pb-c.h \
+	Mumble.proto \
+	network.c \
+	network.h \
+	packet_data_stream.c \
+	packet_data_stream.h \
+	packet_header.h
 
+libskalarwelle_la_CFLAGS = -std=c11 \
+	-Wall \
+	-Wextra \
+	-pedantic 
+
+libskalarwelle_la_LDFLAGS = 
+libskalarwelle_la_LIBADD = $(LIBSKALARWELLE_LIBS)
 all: all-am
 
 .SUFFIXES:
@@ -364,9 +396,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu libskalarwelle/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libskalarwelle/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu libskalarwelle/Makefile
+	  $(AUTOMAKE) --foreign libskalarwelle/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -421,7 +453,7 @@ clean-libLTLIBRARIES:
 	}
 
 libskalarwelle.la: $(libskalarwelle_la_OBJECTS) $(libskalarwelle_la_DEPENDENCIES) $(EXTRA_libskalarwelle_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK) -rpath $(libdir) $(libskalarwelle_la_OBJECTS) $(libskalarwelle_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libskalarwelle_la_LINK) -rpath $(libdir) $(libskalarwelle_la_OBJECTS) $(libskalarwelle_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -429,7 +461,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libskalarwelle.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libskalarwelle_la-Mumble.pb-c.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libskalarwelle_la-libskalarwelle.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libskalarwelle_la-network.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libskalarwelle_la-packet_data_stream.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -451,6 +486,34 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libskalarwelle_la-libskalarwelle.lo: libskalarwelle.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -MT libskalarwelle_la-libskalarwelle.lo -MD -MP -MF $(DEPDIR)/libskalarwelle_la-libskalarwelle.Tpo -c -o libskalarwelle_la-libskalarwelle.lo `test -f 'libskalarwelle.c' || echo '$(srcdir)/'`libskalarwelle.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libskalarwelle_la-libskalarwelle.Tpo $(DEPDIR)/libskalarwelle_la-libskalarwelle.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='libskalarwelle.c' object='libskalarwelle_la-libskalarwelle.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -c -o libskalarwelle_la-libskalarwelle.lo `test -f 'libskalarwelle.c' || echo '$(srcdir)/'`libskalarwelle.c
+
+libskalarwelle_la-Mumble.pb-c.lo: Mumble.pb-c.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -MT libskalarwelle_la-Mumble.pb-c.lo -MD -MP -MF $(DEPDIR)/libskalarwelle_la-Mumble.pb-c.Tpo -c -o libskalarwelle_la-Mumble.pb-c.lo `test -f 'Mumble.pb-c.c' || echo '$(srcdir)/'`Mumble.pb-c.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libskalarwelle_la-Mumble.pb-c.Tpo $(DEPDIR)/libskalarwelle_la-Mumble.pb-c.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Mumble.pb-c.c' object='libskalarwelle_la-Mumble.pb-c.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -c -o libskalarwelle_la-Mumble.pb-c.lo `test -f 'Mumble.pb-c.c' || echo '$(srcdir)/'`Mumble.pb-c.c
+
+libskalarwelle_la-network.lo: network.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -MT libskalarwelle_la-network.lo -MD -MP -MF $(DEPDIR)/libskalarwelle_la-network.Tpo -c -o libskalarwelle_la-network.lo `test -f 'network.c' || echo '$(srcdir)/'`network.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libskalarwelle_la-network.Tpo $(DEPDIR)/libskalarwelle_la-network.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='network.c' object='libskalarwelle_la-network.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -c -o libskalarwelle_la-network.lo `test -f 'network.c' || echo '$(srcdir)/'`network.c
+
+libskalarwelle_la-packet_data_stream.lo: packet_data_stream.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -MT libskalarwelle_la-packet_data_stream.lo -MD -MP -MF $(DEPDIR)/libskalarwelle_la-packet_data_stream.Tpo -c -o libskalarwelle_la-packet_data_stream.lo `test -f 'packet_data_stream.c' || echo '$(srcdir)/'`packet_data_stream.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libskalarwelle_la-packet_data_stream.Tpo $(DEPDIR)/libskalarwelle_la-packet_data_stream.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='packet_data_stream.c' object='libskalarwelle_la-packet_data_stream.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libskalarwelle_la_CFLAGS) $(CFLAGS) -c -o libskalarwelle_la-packet_data_stream.lo `test -f 'packet_data_stream.c' || echo '$(srcdir)/'`packet_data_stream.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
