@@ -41,17 +41,14 @@ struct _SkalarwelleClass
 struct _Skalarwelle
 {
   GtkApplication parent_instance;
-
   SkalarwellePrivate *priv;
-
 };
 
 GType
-skalarwelle_get_type (void)
-  G_GNUC_CONST;
-     Skalarwelle *skalarwelle_new (void);
-
-/* Callbacks */
+skalarwelle_get_type (void);
+  
+Skalarwelle*
+skalarwelle_new (void);
 
 G_END_DECLS
 #endif /* _APPLICATION_H_ */

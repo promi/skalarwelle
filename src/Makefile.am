@@ -22,7 +22,9 @@ bin_PROGRAMS = skalarwelle
 skalarwelle_SOURCES = \
 	main.c \
 	skalarwelle.h \
-	skalarwelle.c	
+	skalarwelle.c \
+	skalarwelle-main-window.c \
+	skalarwelle-main-window.h	
 
 
 skalarwelle_LDFLAGS = \

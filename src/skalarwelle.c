@@ -16,73 +16,28 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "skalarwelle.h"
-
 #include <glib/gi18n.h>
 
-
-
-/* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR"/ui/skalarwelle.ui" */
-#define UI_FILE "src/skalarwelle.ui"
-#define TOP_WINDOW "window"
-
+#include "skalarwelle.h"
+#include "skalarwelle-main-window.h"
 
 G_DEFINE_TYPE (Skalarwelle, skalarwelle, GTK_TYPE_APPLICATION);
 
-/* ANJUTA: Macro SKALARWELLE_APPLICATION gets Skalarwelle - DO NOT REMOVE */
 struct _SkalarwellePrivate
 {
-  /* ANJUTA: Widgets declaration for skalarwelle.ui - DO NOT REMOVE */
+
 };
 
-/* Create a new window loading a file */
 static void
 skalarwelle_new_window (GApplication *app, GFile * file)
 {
-  GtkWidget *window;
+  SkalarwelleMainWindow *win = skalarwelle_main_window_new ();
 
-  GtkBuilder *builder;
-  GError *error = NULL;
+  skalarwelle_main_window_set_app (win, app);
 
-  SkalarwellePrivate *priv = SKALARWELLE_APPLICATION (app)->priv;
-
-  /* Load UI from file */
-  builder = gtk_builder_new ();
-  if (!gtk_builder_add_from_file (builder, UI_FILE, &error))
-    {
-      g_critical ("Couldn't load builder file: %s", error->message);
-      g_error_free (error);
-    }
-
-  /* Auto-connect signal handlers */
-  gtk_builder_connect_signals (builder, app);
-
-  /* Get the window object from the ui file */
-  window = GTK_WIDGET (gtk_builder_get_object (builder, TOP_WINDOW));
-  if (!window)
-    {
-      g_critical ("Widget \"%s\" is missing in file %s.",
-                  TOP_WINDOW, UI_FILE);
-    }
-
-
-  /* ANJUTA: Widgets initialization for skalarwelle.ui - DO NOT REMOVE */
-
-  g_object_unref (builder);
-
-
-  gtk_window_set_application (GTK_WINDOW (window), GTK_APPLICATION (app));
-  if (file != NULL)
-    {
-      /* TODO: Add code here to open the file in the new window */
-    }
-
-  gtk_widget_show_all (GTK_WIDGET (window));
+  g_object_unref (win);
 }
 
-
-/* GApplication implementation */
 static void
 skalarwelle_activate (GApplication *application)
 {
@@ -128,6 +83,6 @@ Skalarwelle *
 skalarwelle_new (void)
 {
   return g_object_new (skalarwelle_get_type (),
-                       "application-id", "org.gnome.skalarwelle",
+                       "application-id", "com.github.promi.skalarwelle",
                        "flags", G_APPLICATION_HANDLES_OPEN, NULL);
 }
