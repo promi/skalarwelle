@@ -31,7 +31,7 @@ G_DEFINE_TYPE (SkalarwelleApplication, skalarwelle_application, GTK_TYPE_APPLICA
 /* *INDENT-ON* */
 
 static void
-skalarwelle_application_new_window (GApplication *app, GFile * file)
+skalarwelle_application_new_window (GApplication *app, GFile *file)
 {
   SkalarwelleMainWindow *win = skalarwelle_main_window_new ();
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
@@ -46,18 +46,13 @@ skalarwelle_application_activate (GApplication *application)
 
 static void
 skalarwelle_application_open (GApplication *application,
-                              GFile ** files, gint n_files, const gchar *hint)
+                              GFile **files, gint n_files, const gchar *hint)
 {
-  gint i;
-
-  for (i = 0; i < n_files; i++)
-    {
-      skalarwelle_application_new_window (application, files[i]);
-    }
+  skalarwelle_application_new_window (application, NULL);
 }
 
 static void
-skalarwelle_application_init (SkalarwelleApplication * object)
+skalarwelle_application_init (SkalarwelleApplication *object)
 {
 }
 
@@ -68,7 +63,7 @@ skalarwelle_application_finalize (GObject *object)
 }
 
 static void
-skalarwelle_application_class_init (SkalarwelleApplicationClass * klass)
+skalarwelle_application_class_init (SkalarwelleApplicationClass *klass)
 {
   G_APPLICATION_CLASS (klass)->activate = skalarwelle_application_activate;
   G_APPLICATION_CLASS (klass)->open = skalarwelle_application_open;

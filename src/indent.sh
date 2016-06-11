@@ -17,6 +17,7 @@ indent \
   -T GApplicationClass \
   -T GAsyncResult \
   -T GError \
+  -T GFile \
   -T GIOStream \
   -T GNetworkAddress \
   -T GObject \
@@ -25,15 +26,16 @@ indent \
   -T GSocketClient \
   -T GSocketClientEvent \
   -T GSocketConnectable \
+  -T GtkToolButton \
   -T GTlsCertificate \
   -T GTlsConnection \
-  -T MumbleApplication \
-  -T MumbleApplicationClass \
   -T MumbleNetwork \
   -T MumbleNetworkClass \
   -T MumblePacketHeader \
   -T OpusDecoder \
-  -T GtkToolButton \
+  -T SkalarwelleApplication \
+  -T SkalarwelleApplicationClass \
   -T SkalarwelleMainWindow \
   -T SkalarwelleMainWindowClass \
   -nut "$@"
+
