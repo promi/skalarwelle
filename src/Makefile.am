@@ -1,12 +1,3 @@
-## Process this file with automake to produce Makefile.in
-
-## Created by Anjuta
-
-
-uidir = $(pkgdatadir)/ui
-ui_DATA = skalarwelle.ui
-
-
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
@@ -21,24 +12,24 @@ bin_PROGRAMS = skalarwelle
 
 skalarwelle_SOURCES = \
 	main.c \
-	skalarwelle.h \
-	skalarwelle.c \
+	skalarwelle-application.c \
+	skalarwelle-application.h \
 	skalarwelle-main-window.c \
-	skalarwelle-main-window.h	
-
+	skalarwelle-main-window.h \
+	skalarwelle-main-window.ui
 
 skalarwelle_LDFLAGS = \
 	-Wl,--export-dynamic
 
 skalarwelle_LDADD = $(SKALARWELLE_LIBS)
 
+nodist_skalarwelle_SOURCES = resources.c
 
+CLEANFILES = resources.c
 
+resources.c: resources.xml skalarwelle-main-window.ui
+	glib-compile-resources $(srcdir)/resources.xml --target=$@ \
+	--sourcedir=$(srcdir) --c-name skalarwelle --generate-source
 
-EXTRA_DIST = $(ui_DATA)
-
-# Remove ui directory on uninstall
 uninstall-local:
-	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
-

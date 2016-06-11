@@ -17,27 +17,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <config.h>
+#ifndef _SKALARWELLE_APPLICATION_H_
+#define _SKALARWELLE_APPLICATION_H_
+
 #include <gtk/gtk.h>
-#include "skalarwelle-application.h"
 
-#include <glib/gi18n.h>
+/* *INDENT-OFF* */
+G_BEGIN_DECLS
+#define SKALARWELLE_TYPE_APPLICATION skalarwelle_application_get_type ()
+G_DECLARE_FINAL_TYPE (SkalarwelleApplication, skalarwelle_application,
+                      SKALARWELLE, APPLICATION, GtkApplication)
+/* *INDENT-ON* */
 
-int
-main (int argc, char *argv[])
-{
-  SkalarwelleApplication *app;
-  int status;
+SkalarwelleApplication *skalarwelle_application_new (void);
 
-#ifdef ENABLE_NLS
-  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-#endif
-
-  app = skalarwelle_application_new ();
-  status = g_application_run (G_APPLICATION (app), argc, argv);
-  g_object_unref (app);
-
-  return status;
-}
+G_END_DECLS
+#endif /* _SKALARWELLE_APPLICATION_H_ */

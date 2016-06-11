@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/github/promi/skalarwelle/">
+    <file preprocess="xml-stripblanks">skalarwelle-main-window.ui</file>
+  </gresource>
+</gresources>
+
