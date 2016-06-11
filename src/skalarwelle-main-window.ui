@@ -4,6 +4,7 @@
   <requires lib="gtk+" version="3.18"/>
   <template class="SkalarwelleMainWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Skalarwelle</property>
     <child>
       <object class="GtkBox" id="outer_box">
         <property name="visible">True</property>

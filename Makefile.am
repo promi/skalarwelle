@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = src po
+SUBDIRS = src po libskalarwelle
 
 dist_doc_DATA = \
 	README.md \

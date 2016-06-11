@@ -19,6 +19,8 @@
 
 #include "skalarwelle-main-window.h"
 
+#include <glib/gi18n.h>
+
 typedef struct _SkalarwelleMainWindow
 {
   GtkApplicationWindow parent;
@@ -67,5 +69,5 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
 {
   SkalarwelleMainWindow *self = SKALARWELLE_MAIN_WINDOW (user_data);
   g_return_if_fail (self != NULL);
-  printf ("Connect clicked\n");
+  printf (_("Connect clicked\n"));
 }

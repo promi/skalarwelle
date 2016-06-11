@@ -10,7 +10,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 AM_GLIB_GNU_GETTEXT
 
-dnl LT_INIT
+LT_INIT
 
 PKG_CHECK_MODULES(SKALARWELLE, [gtk+-3.0 >= 2.90.3 ])
 
@@ -18,4 +18,5 @@ AC_OUTPUT([
 Makefile
 src/Makefile
 po/Makefile.in
+libskalarwelle/Makefile
 ])
