@@ -7,7 +7,8 @@
 #endif
 
 #include "Mumble.pb-c.h"
-void mumble_proto__version__init (MumbleProto__Version * message)
+void
+mumble_proto__version__init (MumbleProto__Version * message)
 {
   static MumbleProto__Version init_value = MUMBLE_PROTO__VERSION__INIT;
   *message = init_value;
@@ -51,7 +52,8 @@ void mumble_proto__version__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__udptunnel__init (MumbleProto__UDPTunnel * message)
+void
+mumble_proto__udptunnel__init (MumbleProto__UDPTunnel * message)
 {
   static MumbleProto__UDPTunnel init_value = MUMBLE_PROTO__UDPTUNNEL__INIT;
   *message = init_value;
@@ -95,7 +97,8 @@ void mumble_proto__udptunnel__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__authenticate__init (MumbleProto__Authenticate * message)
+void
+mumble_proto__authenticate__init (MumbleProto__Authenticate * message)
 {
   static MumbleProto__Authenticate init_value =
     MUMBLE_PROTO__AUTHENTICATE__INIT;
@@ -144,13 +147,15 @@ void mumble_proto__authenticate__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__ping__init (MumbleProto__Ping * message)
+void
+mumble_proto__ping__init (MumbleProto__Ping * message)
 {
   static MumbleProto__Ping init_value = MUMBLE_PROTO__PING__INIT;
   *message = init_value;
 }
 
-size_t mumble_proto__ping__get_packed_size (const MumbleProto__Ping * message)
+size_t
+mumble_proto__ping__get_packed_size (const MumbleProto__Ping * message)
 {
   assert (message->base.descriptor == &mumble_proto__ping__descriptor);
   return
@@ -187,7 +192,8 @@ void mumble_proto__ping__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__reject__init (MumbleProto__Reject * message)
+void
+mumble_proto__reject__init (MumbleProto__Reject * message)
 {
   static MumbleProto__Reject init_value = MUMBLE_PROTO__REJECT__INIT;
   *message = init_value;
@@ -231,7 +237,8 @@ void mumble_proto__reject__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__server_sync__init (MumbleProto__ServerSync * message)
+void
+mumble_proto__server_sync__init (MumbleProto__ServerSync * message)
 {
   static MumbleProto__ServerSync init_value = MUMBLE_PROTO__SERVER_SYNC__INIT;
   *message = init_value;
@@ -275,7 +282,8 @@ void mumble_proto__server_sync__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__channel_remove__init (MumbleProto__ChannelRemove * message)
+void
+mumble_proto__channel_remove__init (MumbleProto__ChannelRemove * message)
 {
   static MumbleProto__ChannelRemove init_value =
     MUMBLE_PROTO__CHANNEL_REMOVE__INIT;
@@ -324,7 +332,8 @@ void mumble_proto__channel_remove__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__channel_state__init (MumbleProto__ChannelState * message)
+void
+mumble_proto__channel_state__init (MumbleProto__ChannelState * message)
 {
   static MumbleProto__ChannelState init_value =
     MUMBLE_PROTO__CHANNEL_STATE__INIT;
@@ -373,7 +382,8 @@ void mumble_proto__channel_state__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__user_remove__init (MumbleProto__UserRemove * message)
+void
+mumble_proto__user_remove__init (MumbleProto__UserRemove * message)
 {
   static MumbleProto__UserRemove init_value = MUMBLE_PROTO__USER_REMOVE__INIT;
   *message = init_value;
@@ -417,7 +427,8 @@ void mumble_proto__user_remove__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__user_state__init (MumbleProto__UserState * message)
+void
+mumble_proto__user_state__init (MumbleProto__UserState * message)
 {
   static MumbleProto__UserState init_value = MUMBLE_PROTO__USER_STATE__INIT;
   *message = init_value;
@@ -469,7 +480,8 @@ void mumble_proto__ban_list__ban_entry__init
   *message = init_value;
 }
 
-void mumble_proto__ban_list__init (MumbleProto__BanList * message)
+void
+mumble_proto__ban_list__init (MumbleProto__BanList * message)
 {
   static MumbleProto__BanList init_value = MUMBLE_PROTO__BAN_LIST__INIT;
   *message = init_value;
@@ -513,7 +525,8 @@ void mumble_proto__ban_list__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__text_message__init (MumbleProto__TextMessage * message)
+void
+mumble_proto__text_message__init (MumbleProto__TextMessage * message)
 {
   static MumbleProto__TextMessage init_value =
     MUMBLE_PROTO__TEXT_MESSAGE__INIT;
@@ -620,20 +633,23 @@ void mumble_proto__acl__chan_group__init
   *message = init_value;
 }
 
-void mumble_proto__acl__chan_acl__init (MumbleProto__ACL__ChanACL * message)
+void
+mumble_proto__acl__chan_acl__init (MumbleProto__ACL__ChanACL * message)
 {
   static MumbleProto__ACL__ChanACL init_value =
     MUMBLE_PROTO__ACL__CHAN_ACL__INIT;
   *message = init_value;
 }
 
-void mumble_proto__acl__init (MumbleProto__ACL * message)
+void
+mumble_proto__acl__init (MumbleProto__ACL * message)
 {
   static MumbleProto__ACL init_value = MUMBLE_PROTO__ACL__INIT;
   *message = init_value;
 }
 
-size_t mumble_proto__acl__get_packed_size (const MumbleProto__ACL * message)
+size_t
+mumble_proto__acl__get_packed_size (const MumbleProto__ACL * message)
 {
   assert (message->base.descriptor == &mumble_proto__acl__descriptor);
   return
@@ -670,7 +686,8 @@ void mumble_proto__acl__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__query_users__init (MumbleProto__QueryUsers * message)
+void
+mumble_proto__query_users__init (MumbleProto__QueryUsers * message)
 {
   static MumbleProto__QueryUsers init_value = MUMBLE_PROTO__QUERY_USERS__INIT;
   *message = init_value;
@@ -714,7 +731,8 @@ void mumble_proto__query_users__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__crypt_setup__init (MumbleProto__CryptSetup * message)
+void
+mumble_proto__crypt_setup__init (MumbleProto__CryptSetup * message)
 {
   static MumbleProto__CryptSetup init_value = MUMBLE_PROTO__CRYPT_SETUP__INIT;
   *message = init_value;
@@ -808,7 +826,8 @@ void mumble_proto__context_action_modify__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__context_action__init (MumbleProto__ContextAction * message)
+void
+mumble_proto__context_action__init (MumbleProto__ContextAction * message)
 {
   static MumbleProto__ContextAction init_value =
     MUMBLE_PROTO__CONTEXT_ACTION__INIT;
@@ -865,7 +884,8 @@ void mumble_proto__user_list__user__init
   *message = init_value;
 }
 
-void mumble_proto__user_list__init (MumbleProto__UserList * message)
+void
+mumble_proto__user_list__init (MumbleProto__UserList * message)
 {
   static MumbleProto__UserList init_value = MUMBLE_PROTO__USER_LIST__INIT;
   *message = init_value;
@@ -917,7 +937,8 @@ void mumble_proto__voice_target__target__init
   *message = init_value;
 }
 
-void mumble_proto__voice_target__init (MumbleProto__VoiceTarget * message)
+void
+mumble_proto__voice_target__init (MumbleProto__VoiceTarget * message)
 {
   static MumbleProto__VoiceTarget init_value =
     MUMBLE_PROTO__VOICE_TARGET__INIT;
@@ -1016,7 +1037,8 @@ void mumble_proto__permission_query__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__codec_version__init (MumbleProto__CodecVersion * message)
+void
+mumble_proto__codec_version__init (MumbleProto__CodecVersion * message)
 {
   static MumbleProto__CodecVersion init_value =
     MUMBLE_PROTO__CODEC_VERSION__INIT;
@@ -1073,7 +1095,8 @@ void mumble_proto__user_stats__stats__init
   *message = init_value;
 }
 
-void mumble_proto__user_stats__init (MumbleProto__UserStats * message)
+void
+mumble_proto__user_stats__init (MumbleProto__UserStats * message)
 {
   static MumbleProto__UserStats init_value = MUMBLE_PROTO__USER_STATS__INIT;
   *message = init_value;
@@ -1117,7 +1140,8 @@ void mumble_proto__user_stats__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__request_blob__init (MumbleProto__RequestBlob * message)
+void
+mumble_proto__request_blob__init (MumbleProto__RequestBlob * message)
 {
   static MumbleProto__RequestBlob init_value =
     MUMBLE_PROTO__REQUEST_BLOB__INIT;
@@ -1166,7 +1190,8 @@ void mumble_proto__request_blob__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__server_config__init (MumbleProto__ServerConfig * message)
+void
+mumble_proto__server_config__init (MumbleProto__ServerConfig * message)
 {
   static MumbleProto__ServerConfig init_value =
     MUMBLE_PROTO__SERVER_CONFIG__INIT;
@@ -1215,7 +1240,8 @@ void mumble_proto__server_config__free_unpacked
   protobuf_c_message_free_unpacked ((ProtobufCMessage *) message, allocator);
 }
 
-void mumble_proto__suggest_config__init (MumbleProto__SuggestConfig * message)
+void
+mumble_proto__suggest_config__init (MumbleProto__SuggestConfig * message)
 {
   static MumbleProto__SuggestConfig init_value =
     MUMBLE_PROTO__SUGGEST_CONFIG__INIT;

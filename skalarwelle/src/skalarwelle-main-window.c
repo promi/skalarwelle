@@ -69,5 +69,5 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
 {
   SkalarwelleMainWindow *self = SKALARWELLE_MAIN_WINDOW (user_data);
   g_return_if_fail (self != NULL);
-  printf (_("Connect clicked\n"));
+  skalarwelle_connect ("localhost", 64738);
 }
