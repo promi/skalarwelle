@@ -24,6 +24,8 @@
 typedef struct _SkalarwelleMainWindow
 {
   GtkApplicationWindow parent;
+
+  GtkNotebook *notebook;
 } SkalarwelleMainWindow;
 
 /* *INDENT-OFF* */
@@ -55,6 +57,8 @@ skalarwelle_main_window_class_init (SkalarwelleMainWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, s);
   gtk_widget_class_bind_template_callback (widget_class,
                                            skalarwelle_main_window_connect_clicked);
+  gtk_widget_class_bind_template_child (widget_class, SkalarwelleMainWindow,
+                                        notebook);
 }
 
 SkalarwelleMainWindow *
@@ -101,6 +105,16 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
       skalarwelle_connect (g_value_get_string (&host_name),
                            (guint16) g_value_get_uint (&port),
                            g_value_get_string (&user_name));
+
+      gchar label_text[100];
+      snprintf (label_text, 100, "%s:%d (%s)", g_value_get_string (&host_name),
+                (guint16) g_value_get_uint (&port),
+                g_value_get_string (&user_name));
+      GtkLabel *label = gtk_label_new (label_text);
+      GtkTreeView *treeview = gtk_tree_view_new ();
+      gtk_notebook_append_page (self->notebook, GTK_WIDGET (treeview), label);
+      gtk_widget_show_all (treeview);
+      gtk_widget_show_all (label);
       break;
     default:
       break;
