@@ -10,8 +10,13 @@ AC_PROG_CC
 
 LT_INIT
 
-PKG_CHECK_MODULES(LIBSKALARWELLE, [glib-2.0 gobject-2.0 gio-2.0 libprotobuf-c 
-	opus vorbis vorbisenc shout])
+dnl glib-2.0 gobject-2.0 gio-2.0 libprotobuf-c opus vorbis vorbisenc shout
+
+AX_PKG_CHECK_MODULES(
+	LIBSKALARWELLE,
+	[],
+	[glib-2.0 libprotobuf-c]
+)
 
 AC_SUBST([API_VERSION],api_version)
 

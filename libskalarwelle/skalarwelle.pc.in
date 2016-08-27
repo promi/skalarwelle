@@ -8,4 +8,5 @@ Description: GLib based Mumble client library
 Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -lskalarwelle-@API_VERSION@
 Cflags: -I${includedir}/skalarwelle-@API_VERSION@
-
+Requires: @AX_PACKAGE_REQUIRES@
+Requires.private: @AX_PACKAGE_REQUIRES_PRIVATE@
