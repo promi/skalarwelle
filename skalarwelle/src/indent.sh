@@ -16,6 +16,7 @@ indent \
   -T GApplication \
   -T GApplicationClass \
   -T GAsyncResult \
+  -T GBinding \
   -T GError \
   -T GFile \
   -T GIOStream \
@@ -29,6 +30,7 @@ indent \
   -T GtkToolButton \
   -T GTlsCertificate \
   -T GTlsConnection \
+  -T GValue \
   -T MumbleNetwork \
   -T MumbleNetworkClass \
   -T MumblePacketHeader \
