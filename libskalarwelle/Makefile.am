@@ -1,5 +1,7 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
+AM_CPPFLAGS = -Wall -pedantic -std=c11 -Wextra
+
 lib_LTLIBRARIES = libskalarwelle-@API_VERSION@.la
 
 libskalarwelle_@API_VERSION@_la_CPPFLAGS = $(LIBSKALARWELLE_CFLAGS)

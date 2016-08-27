@@ -22,8 +22,11 @@
 #include <glib/gi18n.h>
 
 void
-skalarwelle_connect (const gchar *server, guint16 port)
+skalarwelle_connect (const gchar *host_name, guint16 port,
+                     const char *user_name)
 {
-  g_return_if_fail (server != NULL);
-  printf (_("Connect clicked\n"));
+  g_return_if_fail (host_name != NULL);
+  g_return_if_fail (user_name != NULL);
+  printf (_
+          ("Connect clicked: host_name = '%s', port = %d, user_name = '%s'\n"), host_name, port, user_name);
 }

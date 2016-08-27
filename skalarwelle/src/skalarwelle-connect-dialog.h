@@ -32,11 +32,5 @@ G_DECLARE_FINAL_TYPE (SkalarwelleConnectDialog, skalarwelle_connect_dialog,
 
 SkalarwelleConnectDialog *skalarwelle_connect_dialog_new (GtkWindow * parent);
 
-/*
-void
-skalarwelle_connect_dialog_connect_clicked (gpointer user_data,
-                                         GtkToolButton *button);
- */
-
 G_END_DECLS
 #endif /* _SKALARWELLE_CONNECT_DIALOG_H_ */

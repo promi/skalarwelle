@@ -38,7 +38,7 @@ typedef struct _SkalarwelleConnectDialog
 
 /* *INDENT-OFF* */
 G_DEFINE_TYPE (SkalarwelleConnectDialog, skalarwelle_connect_dialog,
-               GTK_TYPE_DIALOG);
+               GTK_TYPE_DIALOG)
 /* *INDENT-ON* */
 
 enum
@@ -111,7 +111,7 @@ skalarwelle_connect_dialog_get_property (GObject *object,
 static void
 skalarwelle_connect_dialog_init (SkalarwelleConnectDialog * dialog)
 {
-  GtkDialog *dia = GTK_DIALOG (dialog);
+  // GtkDialog *dia = GTK_DIALOG (dialog);
   gtk_widget_init_template (GTK_WIDGET (dialog));
   g_object_bind_property (dialog, "host-name", dialog->host_name_entry,
                           "text", G_BINDING_BIDIRECTIONAL);
@@ -190,14 +190,3 @@ skalarwelle_connect_dialog_new (GtkWindow * parent)
   gtk_window_set_destroy_with_parent (win, TRUE);
   return dialog;
 }
-
-/*
-void
-skalarwelle_connect_dialog_connect_clicked (gpointer user_data,
-                                         GtkToolButton *button)
-{
-  SkalarwelleConnectDialog *self = SKALARWELLE_CONNECT_DIALOG (user_data);
-  g_return_if_fail (self != NULL);
-  skalarwelle_connect ("localhost", 64738);
-}
- */

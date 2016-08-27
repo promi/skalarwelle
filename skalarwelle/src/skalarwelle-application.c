@@ -27,11 +27,13 @@ typedef struct _SkalarwelleApplication
 } SkalarwelleApplication;
 
 /* *INDENT-OFF* */
-G_DEFINE_TYPE (SkalarwelleApplication, skalarwelle_application, GTK_TYPE_APPLICATION);
+G_DEFINE_TYPE (SkalarwelleApplication, skalarwelle_application,
+               GTK_TYPE_APPLICATION)
 /* *INDENT-ON* */
 
 static void
-skalarwelle_application_new_window (GApplication *app, GFile *file)
+skalarwelle_application_new_window (GApplication *app,
+                                    G_GNUC_UNUSED GFile *file)
 {
   SkalarwelleMainWindow *win = skalarwelle_main_window_new ();
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
@@ -46,13 +48,15 @@ skalarwelle_application_activate (GApplication *application)
 
 static void
 skalarwelle_application_open (GApplication *application,
-                              GFile **files, gint n_files, const gchar *hint)
+                              G_GNUC_UNUSED GFile **files,
+                              G_GNUC_UNUSED gint n_files,
+                              G_GNUC_UNUSED const gchar *hint)
 {
   skalarwelle_application_new_window (application, NULL);
 }
 
 static void
-skalarwelle_application_init (SkalarwelleApplication *object)
+skalarwelle_application_init (G_GNUC_UNUSED SkalarwelleApplication *object)
 {
 }
 

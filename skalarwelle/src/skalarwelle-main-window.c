@@ -28,7 +28,7 @@ typedef struct _SkalarwelleMainWindow
 
 /* *INDENT-OFF* */
 G_DEFINE_TYPE (SkalarwelleMainWindow, skalarwelle_main_window, 
-               GTK_TYPE_APPLICATION_WINDOW);
+               GTK_TYPE_APPLICATION_WINDOW)
 /* *INDENT-ON* */
 
 static void
@@ -65,7 +65,7 @@ skalarwelle_main_window_new (void)
 
 void
 skalarwelle_main_window_connect_clicked (gpointer user_data,
-                                         GtkToolButton *button)
+                                         G_GNUC_UNUSED GtkToolButton *button)
 {
   SkalarwelleMainWindow *self = SKALARWELLE_MAIN_WINDOW (user_data);
   g_return_if_fail (self != NULL);

@@ -13,7 +13,7 @@ skalarwelle_SOURCES = src/main.c \
 	src/skalarwelle-connect-dialog.h \
 	src/skalarwelle-connect-dialog.ui
 
-AM_CPPFLAGS = \
+AM_CPPFLAGS = -Wall -pedantic -std=c11 -Wextra \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
