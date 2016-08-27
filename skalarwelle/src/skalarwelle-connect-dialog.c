@@ -54,7 +54,7 @@ static GParamSpec *obj_properties[N_PROPERTIES] = { NULL, };
 static void
 skalarwelle_connect_dialog_set_property (GObject *object,
                                          guint property_id,
-                                         const GValue * value,
+                                         const GValue *value,
                                          GParamSpec * pspec)
 {
   SkalarwelleConnectDialog *self = SKALARWELLE_CONNECT_DIALOG (object);
@@ -84,7 +84,7 @@ skalarwelle_connect_dialog_set_property (GObject *object,
 static void
 skalarwelle_connect_dialog_get_property (GObject *object,
                                          guint property_id,
-                                         GValue * value, GParamSpec * pspec)
+                                         GValue *value, GParamSpec * pspec)
 {
   SkalarwelleConnectDialog *self = SKALARWELLE_CONNECT_DIALOG (object);
 
@@ -108,6 +108,42 @@ skalarwelle_connect_dialog_get_property (GObject *object,
     }
 }
 
+gboolean
+int_to_str (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
+            GValue *to_value, G_GNUC_UNUSED gpointer user_data)
+{
+  if (G_VALUE_HOLDS_UINT (from_value))
+    {
+
+      gchar s[100];
+      snprintf (s, 100, "%d", g_value_get_uint (from_value));
+      g_value_set_string (to_value, s);
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
+}
+
+gboolean
+str_to_int (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
+            GValue *to_value, G_GNUC_UNUSED gpointer user_data)
+{
+  if (G_VALUE_HOLDS_STRING (from_value))
+    {
+      g_value_set_uint (to_value,
+                        g_ascii_strtoull (g_value_get_string (from_value),
+                                          NULL, 10));
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
+}
+
+
 static void
 skalarwelle_connect_dialog_init (SkalarwelleConnectDialog * dialog)
 {
@@ -115,8 +151,9 @@ skalarwelle_connect_dialog_init (SkalarwelleConnectDialog * dialog)
   gtk_widget_init_template (GTK_WIDGET (dialog));
   g_object_bind_property (dialog, "host-name", dialog->host_name_entry,
                           "text", G_BINDING_BIDIRECTIONAL);
-  g_object_bind_property (dialog, "port", dialog->port_entry, "text",
-                          G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property_full (dialog, "port", dialog->port_entry, "text",
+                               G_BINDING_BIDIRECTIONAL, int_to_str,
+                               str_to_int, NULL, NULL);
   g_object_bind_property (dialog, "user-name", dialog->user_name_entry,
                           "text", G_BINDING_BIDIRECTIONAL);
 }
@@ -189,9 +226,9 @@ skalarwelle_connect_dialog_new (GtkWindow * parent)
   gtk_window_set_modal (win, TRUE);
   gtk_window_set_destroy_with_parent (win, TRUE);
   /*
-  // This doesn't work, but should (see #1)
-  gtk_widget_set_can_default (dialog->ok_button, TRUE);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+     // This doesn't work, but should (see #1)
+     gtk_widget_set_can_default (dialog->ok_button, TRUE);
+     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
    */
   return dialog;
 }
