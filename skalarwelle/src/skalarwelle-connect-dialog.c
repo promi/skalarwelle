@@ -188,5 +188,10 @@ skalarwelle_connect_dialog_new (GtkWindow * parent)
   gtk_window_set_transient_for (win, parent);
   gtk_window_set_modal (win, TRUE);
   gtk_window_set_destroy_with_parent (win, TRUE);
+  /*
+  // This doesn't work, but should (see #1)
+  gtk_widget_set_can_default (dialog->ok_button, TRUE);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+   */
   return dialog;
 }
