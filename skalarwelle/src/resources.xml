@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/com/github/promi/skalarwelle/">
     <file preprocess="xml-stripblanks">skalarwelle-main-window.ui</file>
+    <file preprocess="xml-stripblanks">skalarwelle-connect-dialog.ui</file>
   </gresource>
 </gresources>
 

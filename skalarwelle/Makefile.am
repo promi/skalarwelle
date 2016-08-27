@@ -8,7 +8,10 @@ skalarwelle_SOURCES = src/main.c \
 	src/skalarwelle-application.h \
 	src/skalarwelle-main-window.c \
 	src/skalarwelle-main-window.h \
-	src/skalarwelle-main-window.ui
+	src/skalarwelle-main-window.ui \
+	src/skalarwelle-connect-dialog.c \
+	src/skalarwelle-connect-dialog.h \
+	src/skalarwelle-connect-dialog.ui
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
@@ -24,7 +27,8 @@ nodist_skalarwelle_SOURCES = src/resources.c
 
 CLEANFILES = src/resources.c
 
-src/resources.c: src/resources.xml src/skalarwelle-main-window.ui
+src/resources.c: src/resources.xml src/skalarwelle-main-window.ui \
+src/skalarwelle-connect-dialog.ui
 	glib-compile-resources $(srcdir)/src/resources.xml --target=$@ \
 	--sourcedir=$(srcdir)/src --c-name skalarwelle --generate-source
 

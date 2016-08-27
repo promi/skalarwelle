@@ -69,5 +69,22 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
 {
   SkalarwelleMainWindow *self = SKALARWELLE_MAIN_WINDOW (user_data);
   g_return_if_fail (self != NULL);
-  skalarwelle_connect ("localhost", 64738);
+
+  SkalarwelleConnectDialog *dialog =
+    skalarwelle_connect_dialog_new (GTK_WINDOW (self));
+  GtkWidget *wid = GTK_WIDGET (dialog);
+  gtk_widget_show_all (wid);
+  gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+  switch (result)
+    {
+      case GTK_RESPONSE_OK:
+         skalarwelle_connect ("localhost", 64738);
+         // do_application_specific_something ();
+         break;
+      default:
+         // do_nothing_since_dialog_was_cancelled ();
+         break;
+    }
+  gtk_widget_destroy (wid);
+
 }

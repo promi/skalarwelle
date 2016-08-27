@@ -17,26 +17,26 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _SKALARWELLE_MAIN_WINDOW_H_
-#define _SKALARWELLE_MAIN_WINDOW_H_
+#ifndef _SKALARWELLE_CONNECT_DIALOG_H_
+#define _SKALARWELLE_CONNECT_DIALOG_H_
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "skalarwelle-connect-dialog.h"
-
 /* *INDENT-OFF* */
 G_BEGIN_DECLS
-#define SKALARWELLE_TYPE_MAIN_WINDOW skalarwelle_main_window_get_type ()
-G_DECLARE_FINAL_TYPE (SkalarwelleMainWindow, skalarwelle_main_window,
-                      SKALARWELLE, MAIN_WINDOW, GtkApplicationWindow)
+#define SKALARWELLE_TYPE_CONNECT_DIALOG skalarwelle_connect_dialog_get_type ()
+G_DECLARE_FINAL_TYPE (SkalarwelleConnectDialog, skalarwelle_connect_dialog,
+                      SKALARWELLE, CONNECT_DIALOG, GtkDialog)
 /* *INDENT-ON* */
 
-SkalarwelleMainWindow *skalarwelle_main_window_new (void);
+SkalarwelleConnectDialog *skalarwelle_connect_dialog_new (GtkWindow * parent);
 
+/*
 void
-skalarwelle_main_window_connect_clicked (gpointer user_data,
+skalarwelle_connect_dialog_connect_clicked (gpointer user_data,
                                          GtkToolButton *button);
+ */
 
 G_END_DECLS
-#endif /* _SKALARWELLE_MAIN_WINDOW_H_ */
+#endif /* _SKALARWELLE_CONNECT_DIALOG_H_ */
