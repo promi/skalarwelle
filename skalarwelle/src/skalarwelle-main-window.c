@@ -73,18 +73,41 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
   SkalarwelleConnectDialog *dialog =
     skalarwelle_connect_dialog_new (GTK_WINDOW (self));
   GtkWidget *wid = GTK_WIDGET (dialog);
+  GObject *obj = G_OBJECT (dialog);
+
+  GValue host_name = G_VALUE_INIT;
+  g_value_init (&host_name, G_TYPE_STRING);
+  g_value_set_string (&host_name, "localhost");
+  g_object_set_property (obj, "host-name", &host_name);
+
+  GValue port = G_VALUE_INIT;
+  g_value_init (&port, G_TYPE_UINT);
+  g_value_set_uint (&port, 64738);
+  g_object_set_property (obj, "port", &port);
+
+  GValue user_name = G_VALUE_INIT;
+  g_value_init (&user_name, G_TYPE_STRING);
+  g_value_set_string (&user_name, "");
+  g_object_set_property (obj, "user-name", &user_name);
+
   gtk_widget_show_all (wid);
   gint result = gtk_dialog_run (GTK_DIALOG (dialog));
   switch (result)
     {
-      case GTK_RESPONSE_OK:
-         skalarwelle_connect ("localhost", 64738);
-         // do_application_specific_something ();
-         break;
-      default:
-         // do_nothing_since_dialog_was_cancelled ();
-         break;
+    case GTK_RESPONSE_OK:
+      g_object_get_property (obj, "host-name", &host_name);
+      g_object_get_property (obj, "port", &port);
+      g_object_get_property (obj, "user-name", &user_name);
+      skalarwelle_connect (g_value_get_string (&host_name),
+                           (guint16) g_value_get_uint (&port),
+                           g_value_get_string (&user_name));
+      break;
+    default:
+      break;
     }
-  gtk_widget_destroy (wid);
 
+  g_value_unset (&host_name);
+  g_value_unset (&port);
+  g_value_unset (&user_name);
+  gtk_widget_destroy (wid);
 }
