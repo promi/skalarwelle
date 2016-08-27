@@ -107,11 +107,12 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
                            g_value_get_string (&user_name));
 
       gchar label_text[100];
-      snprintf (label_text, 100, "%s:%d (%s)", g_value_get_string (&host_name),
+      snprintf (label_text, 100, "%s:%d (%s)",
+                g_value_get_string (&host_name),
                 (guint16) g_value_get_uint (&port),
                 g_value_get_string (&user_name));
-      GtkLabel *label = gtk_label_new (label_text);
-      GtkTreeView *treeview = gtk_tree_view_new ();
+      GtkWidget *label = gtk_label_new (label_text);
+      GtkWidget *treeview = gtk_tree_view_new ();
       gtk_notebook_append_page (self->notebook, GTK_WIDGET (treeview), label);
       gtk_widget_show_all (treeview);
       gtk_widget_show_all (label);
