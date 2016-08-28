@@ -28,5 +28,6 @@ skalarwelle_connect (const gchar *host_name, guint16 port,
   g_return_if_fail (host_name != NULL);
   g_return_if_fail (user_name != NULL);
   printf (_
-          ("Connect clicked: host_name = '%s', port = %d, user_name = '%s'\n"), host_name, port, user_name);
+          ("Connect clicked: host_name = '%s', port = %d, user_name = '%s'\n"),
+          host_name, port, user_name);
 }
