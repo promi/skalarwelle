@@ -23,7 +23,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include <libskalarwelle-0/libskalarwelle.h>
+#include <libskalarwelle.h>
 #include "skalarwelle-connect-dialog.h"
 
 /* *INDENT-OFF* */

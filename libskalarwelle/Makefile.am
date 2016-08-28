@@ -20,7 +20,7 @@ libskalarwelle_@API_VERSION@_la_SOURCES = \
     src/packet_data_stream.c \
     src/packet_data_stream.h
 
-libskalarwelle_includedir = $(includedir)/libskalarwelle-@API_VERSION@
+libskalarwelle_includedir = $(includedir)/skalarwelle-@API_VERSION@
 libskalarwelle_include_HEADERS = src/libskalarwelle.h
 
 pkgconfigdir = $(libdir)/pkgconfig
