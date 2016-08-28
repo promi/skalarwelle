@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "skalarwelle-main-window.h"
+#include "main-window.h"
 
 #include <glib/gi18n.h>
 
@@ -29,7 +29,7 @@ typedef struct _SkalarwelleMainWindow
 } SkalarwelleMainWindow;
 
 /* *INDENT-OFF* */
-G_DEFINE_TYPE (SkalarwelleMainWindow, skalarwelle_main_window, 
+G_DEFINE_TYPE (SkalarwelleMainWindow, skalarwelle_main_window,
                GTK_TYPE_APPLICATION_WINDOW)
 /* *INDENT-ON* */
 
@@ -53,7 +53,7 @@ skalarwelle_main_window_class_init (SkalarwelleMainWindowClass *klass)
 
   object_class->finalize = skalarwelle_main_window_finalize;
 
-  const gchar *s = "/com/github/promi/skalarwelle/skalarwelle-main-window.ui";
+  const gchar *s = "/com/github/promi/skalarwelle/main-window.ui";
   gtk_widget_class_set_template_from_resource (widget_class, s);
   gtk_widget_class_bind_template_callback (widget_class,
                                            skalarwelle_main_window_connect_clicked);

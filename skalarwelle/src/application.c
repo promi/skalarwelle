@@ -18,8 +18,8 @@
 */
 #include <glib/gi18n.h>
 
-#include "skalarwelle-application.h"
-#include "skalarwelle-main-window.h"
+#include "application.h"
+#include "main-window.h"
 
 typedef struct _SkalarwelleApplication
 {

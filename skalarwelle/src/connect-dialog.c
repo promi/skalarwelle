@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "skalarwelle-connect-dialog.h"
+#include "connect-dialog.h"
 
 #include <glib/gi18n.h>
 
@@ -109,7 +109,7 @@ skalarwelle_connect_dialog_get_property (GObject *object,
 }
 
 gboolean
-int_to_str (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
+skalarwelle_connect_dialog_uint_to_str (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
             GValue *to_value, G_GNUC_UNUSED gpointer user_data)
 {
   if (G_VALUE_HOLDS_UINT (from_value))
@@ -127,7 +127,7 @@ int_to_str (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
 }
 
 gboolean
-str_to_int (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
+skalarwelle_connect_dialog_str_to_uint (G_GNUC_UNUSED GBinding *binding, const GValue *from_value,
             GValue *to_value, G_GNUC_UNUSED gpointer user_data)
 {
   if (G_VALUE_HOLDS_STRING (from_value))
@@ -152,8 +152,8 @@ skalarwelle_connect_dialog_init (SkalarwelleConnectDialog * dialog)
   g_object_bind_property (dialog, "host-name", dialog->host_name_entry,
                           "text", G_BINDING_BIDIRECTIONAL);
   g_object_bind_property_full (dialog, "port", dialog->port_entry, "text",
-                               G_BINDING_BIDIRECTIONAL, int_to_str,
-                               str_to_int, NULL, NULL);
+                               G_BINDING_BIDIRECTIONAL, skalarwelle_connect_dialog_uint_to_str,
+                               skalarwelle_connect_dialog_str_to_uint, NULL, NULL);
   g_object_bind_property (dialog, "user-name", dialog->user_name_entry,
                           "text", G_BINDING_BIDIRECTIONAL);
 }
@@ -176,7 +176,7 @@ skalarwelle_connect_dialog_class_init (SkalarwelleConnectDialogClass * klass)
   object_class->finalize = skalarwelle_connect_dialog_finalize;
 
   const gchar *s =
-    "/com/github/promi/skalarwelle/skalarwelle-connect-dialog.ui";
+    "/com/github/promi/skalarwelle/connect-dialog.ui";
   gtk_widget_class_set_template_from_resource (widget_class, s);
   gtk_widget_class_bind_template_child (widget_class,
                                         SkalarwelleConnectDialog, ok_button);

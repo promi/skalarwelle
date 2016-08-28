@@ -19,7 +19,7 @@
 
 #include <config.h>
 #include <gtk/gtk.h>
-#include "skalarwelle-application.h"
+#include "application.h"
 
 #include <glib/gi18n.h>
 

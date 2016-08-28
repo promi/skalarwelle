@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/promi/skalarwelle/">
-    <file preprocess="xml-stripblanks">skalarwelle-main-window.ui</file>
-    <file preprocess="xml-stripblanks">skalarwelle-connect-dialog.ui</file>
+    <file preprocess="xml-stripblanks">main-window.ui</file>
+    <file preprocess="xml-stripblanks">connect-dialog.ui</file>
   </gresource>
 </gresources>
 

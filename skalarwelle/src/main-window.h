@@ -24,7 +24,7 @@
 #include <gtk/gtk.h>
 
 #include <libskalarwelle.h>
-#include "skalarwelle-connect-dialog.h"
+#include "connect-dialog.h"
 
 /* *INDENT-OFF* */
 G_BEGIN_DECLS

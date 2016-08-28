@@ -4,14 +4,14 @@ bin_PROGRAMS = skalarwelle
 
 skalarwelle_SOURCES = src/main.c \
 	src/resources.xml \
-	src/skalarwelle-application.c \
-	src/skalarwelle-application.h \
-	src/skalarwelle-main-window.c \
-	src/skalarwelle-main-window.h \
-	src/skalarwelle-main-window.ui \
-	src/skalarwelle-connect-dialog.c \
-	src/skalarwelle-connect-dialog.h \
-	src/skalarwelle-connect-dialog.ui
+	src/application.c \
+	src/application.h \
+	src/main-window.c \
+	src/main-window.h \
+	src/main-window.ui \
+	src/connect-dialog.c \
+	src/connect-dialog.h \
+	src/connect-dialog.ui
 
 AM_CPPFLAGS = -Wall -pedantic -std=c11 -Wextra \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
@@ -27,8 +27,8 @@ nodist_skalarwelle_SOURCES = src/resources.c
 
 CLEANFILES = src/resources.c
 
-src/resources.c: src/resources.xml src/skalarwelle-main-window.ui \
-src/skalarwelle-connect-dialog.ui
+src/resources.c: src/resources.xml src/main-window.ui \
+src/connect-dialog.ui
 	glib-compile-resources $(srcdir)/src/resources.xml --target=$@ \
 	--sourcedir=$(srcdir)/src --c-name skalarwelle --generate-source
 
