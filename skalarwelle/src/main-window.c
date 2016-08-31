@@ -68,6 +68,31 @@ skalarwelle_main_window_new (void)
 }
 
 void
+skalarwelle_main_window_connect (SkalarwelleMainWindow *self,
+                                 const gchar *host_name, guint16 port,
+                                 const char *user_name)
+{
+  SkalarwelleConnection *connection = skalarwelle_connection_new ();
+  if (skalarwelle_connection_connect (connection, host_name, port, user_name))
+    {
+      const size_t label_max_length = 100;
+      gchar label_text[label_max_length];
+      snprintf (label_text, label_max_length, "%s:%d (%s)", host_name, port,
+                user_name);
+      GtkWidget *label = gtk_label_new (label_text);
+      GtkWidget *treeview = gtk_tree_view_new ();
+      gtk_notebook_append_page (self->notebook, treeview, label);
+      gtk_widget_show_all (treeview);
+      gtk_widget_show_all (label);
+      g_object_unref (connection);
+    }
+  else
+    {
+      g_object_unref (connection);
+    }
+}
+
+void
 skalarwelle_main_window_connect_clicked (gpointer user_data,
                                          G_GNUC_UNUSED GtkToolButton *button)
 {
@@ -102,20 +127,9 @@ skalarwelle_main_window_connect_clicked (gpointer user_data,
       g_object_get_property (obj, "host-name", &host_name);
       g_object_get_property (obj, "port", &port);
       g_object_get_property (obj, "user-name", &user_name);
-      skalarwelle_connect (g_value_get_string (&host_name),
-                           (guint16) g_value_get_uint (&port),
-                           g_value_get_string (&user_name));
-
-      gchar label_text[100];
-      snprintf (label_text, 100, "%s:%d (%s)",
-                g_value_get_string (&host_name),
-                (guint16) g_value_get_uint (&port),
-                g_value_get_string (&user_name));
-      GtkWidget *label = gtk_label_new (label_text);
-      GtkWidget *treeview = gtk_tree_view_new ();
-      gtk_notebook_append_page (self->notebook, GTK_WIDGET (treeview), label);
-      gtk_widget_show_all (treeview);
-      gtk_widget_show_all (label);
+      skalarwelle_main_window_connect (self, g_value_get_string (&host_name),
+                                       (guint16) g_value_get_uint (&port),
+                                       g_value_get_string (&user_name));
       break;
     default:
       break;

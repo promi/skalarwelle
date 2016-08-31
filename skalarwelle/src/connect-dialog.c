@@ -114,11 +114,14 @@ skalarwelle_connect_dialog_uint_to_str (G_GNUC_UNUSED GBinding *binding,
                                         GValue *to_value,
                                         G_GNUC_UNUSED gpointer user_data)
 {
-  if (G_VALUE_HOLDS_UINT (from_value))
+  if (G_LIKELY (G_VALUE_HOLDS_UINT (from_value)))
     {
-
-      gchar s[100];
-      snprintf (s, 100, "%d", g_value_get_uint (from_value));
+      const size_t max_length = 100;
+      gchar s[max_length];
+      gint length =
+        snprintf (s, max_length, "%" G_GUINT32_FORMAT,
+                  g_value_get_uint (from_value));
+      g_return_val_if_fail (length >= 0 && length < (gint) max_length, FALSE);
       g_value_set_string (to_value, s);
       return TRUE;
     }
@@ -129,17 +132,44 @@ skalarwelle_connect_dialog_uint_to_str (G_GNUC_UNUSED GBinding *binding,
 }
 
 gboolean
-skalarwelle_connect_dialog_str_to_uint (G_GNUC_UNUSED GBinding *binding,
-                                        const GValue *from_value,
-                                        GValue *to_value,
-                                        G_GNUC_UNUSED gpointer user_data)
+skalarwelle_connect_dialog_str_to_uint16 (G_GNUC_UNUSED
+                                          GBinding *binding,
+                                          const GValue
+                                          *from_value,
+                                          GValue *to_value,
+                                          G_GNUC_UNUSED gpointer user_data)
 {
-  if (G_VALUE_HOLDS_STRING (from_value))
+  if (G_LIKELY (G_VALUE_HOLDS_STRING (from_value)))
     {
-      g_value_set_uint (to_value,
-                        g_ascii_strtoull (g_value_get_string (from_value),
-                                          NULL, 10));
-      return TRUE;
+      const char *buff = g_value_get_string (from_value);
+      char *end;
+      errno = 0;
+      const guint64 sl = g_ascii_strtoull (buff, &end, 10);
+      if (end == buff)
+        {
+          g_warning ("%s: not a decimal number\n", buff);
+          return FALSE;
+        }
+      else if ('\0' != *end)
+        {
+          g_warning ("%s: extra characters at end of input: %s\n", buff, end);
+          return FALSE;
+        }
+      else if (G_MAXUINT64 == sl && ERANGE == errno)
+        {
+          g_warning ("%s out of range of type guint64\n", buff);
+          return FALSE;
+        }
+      else if (sl > G_MAXUINT16)
+        {
+          g_warning ("%" G_GUINT64_FORMAT "greater then G_MAXUINT16\n", sl);
+          return FALSE;
+        }
+      else
+        {
+          g_value_set_uint (to_value, (guint16) sl);
+          return TRUE;
+        }
     }
   else
     {
@@ -153,15 +183,18 @@ skalarwelle_connect_dialog_init (SkalarwelleConnectDialog * dialog)
 {
   // GtkDialog *dia = GTK_DIALOG (dialog);
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  g_object_bind_property (dialog, "host-name", dialog->host_name_entry,
-                          "text", G_BINDING_BIDIRECTIONAL);
-  g_object_bind_property_full (dialog, "port", dialog->port_entry, "text",
+  g_object_bind_property (dialog, "host-name",
+                          dialog->host_name_entry, "text",
+                          G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property_full (dialog, "port",
+                               dialog->port_entry, "text",
                                G_BINDING_BIDIRECTIONAL,
                                skalarwelle_connect_dialog_uint_to_str,
-                               skalarwelle_connect_dialog_str_to_uint, NULL,
-                               NULL);
-  g_object_bind_property (dialog, "user-name", dialog->user_name_entry,
-                          "text", G_BINDING_BIDIRECTIONAL);
+                               skalarwelle_connect_dialog_str_to_uint16,
+                               NULL, NULL);
+  g_object_bind_property (dialog, "user-name",
+                          dialog->user_name_entry, "text",
+                          G_BINDING_BIDIRECTIONAL);
 }
 
 static void
@@ -174,13 +207,12 @@ skalarwelle_connect_dialog_finalize (GObject *object)
 }
 
 static void
-skalarwelle_connect_dialog_class_init (SkalarwelleConnectDialogClass * klass)
+  skalarwelle_connect_dialog_class_init
+  (SkalarwelleConnectDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
   object_class->finalize = skalarwelle_connect_dialog_finalize;
-
   const gchar *s = "/com/github/promi/skalarwelle/connect-dialog.ui";
   gtk_widget_class_set_template_from_resource (widget_class, s);
   gtk_widget_class_bind_template_child (widget_class,
@@ -196,27 +228,19 @@ skalarwelle_connect_dialog_class_init (SkalarwelleConnectDialogClass * klass)
   gtk_widget_class_bind_template_child (widget_class,
                                         SkalarwelleConnectDialog,
                                         user_name_entry);
-
   object_class->set_property = skalarwelle_connect_dialog_set_property;
   object_class->get_property = skalarwelle_connect_dialog_get_property;
-
   obj_properties[PROP_HOST_NAME] =
-    g_param_spec_string ("host-name",
-                         "Host name",
+    g_param_spec_string ("host-name", "Host name",
                          "Name of the Mumble server host.",
                          NULL, G_PARAM_READWRITE);
-
   obj_properties[PROP_PORT] =
-    g_param_spec_uint ("port",
-                       "Port",
-                       "Port of the Mumble server.", 0,
-                       65535, 64738, G_PARAM_READWRITE);
-
+    g_param_spec_uint ("port", "Port",
+                       "Port of the Mumble server.", 0, 65535,
+                       64738, G_PARAM_READWRITE);
   obj_properties[PROP_USER_NAME] =
-    g_param_spec_string ("user-name",
-                         "User name",
+    g_param_spec_string ("user-name", "User name",
                          "Name of the Mumble user.", NULL, G_PARAM_READWRITE);
-
   g_object_class_install_properties (object_class,
                                      N_PROPERTIES, obj_properties);
 }

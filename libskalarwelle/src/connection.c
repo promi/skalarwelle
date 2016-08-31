@@ -21,8 +21,8 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-void
-skalarwelle_connect (const gchar *host_name, guint16 port,
+gboolean
+skalarwelle_connection_connect (const gchar *host_name, guint16 port,
                      const char *user_name)
 {
   g_return_if_fail (host_name != NULL);

@@ -17,5 +17,27 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-void skalarwelle_connect (const gchar *host_name, guint16 port,
-                          const char *user_name);
+#ifndef __SKALARWELLE_CONNECTION_H__
+#define __SKALARWELLE_CONNECTION_H__
+
+#include <glib.h>
+#include <glib-object.h>
+
+/* *INDENT-OFF* */
+G_BEGIN_DECLS
+#define SKALARWELLE_TYPE_CONNECTION skalarwelle_connection_get_type ()
+G_DECLARE_FINAL_TYPE (SkalarwelleConnection, skalarwelle_connection,
+                      SKALARWELLE, CONNECTION, GObject)
+/* *INDENT-ON* */
+
+SkalarwelleConnection *skalarwelle_connection_new ();
+
+gboolean skalarwelle_connection_connect (SkalarwelleConnection * connection,
+                                         const gchar *host_name, guint16 port,
+                                         const char *user_name);
+
+/* *INDENT-OFF* */
+G_END_DECLS
+/* *INDENT-ON* */
+
+#endif // __SKALARWELLE_CONNECTION_H__

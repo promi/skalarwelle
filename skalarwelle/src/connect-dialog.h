@@ -20,6 +20,10 @@
 #ifndef _SKALARWELLE_CONNECT_DIALOG_H_
 #define _SKALARWELLE_CONNECT_DIALOG_H_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
