@@ -102,7 +102,7 @@ skalarwelle_main_window_connect (SkalarwelleMainWindow *self,
       gtk_notebook_append_page (self->notebook, treeview, label);
       gtk_widget_show_all (treeview);
       gtk_widget_show_all (label);
-      g_object_unref (connection);
+      // g_object_unref (connection);
     }
   else
     {
