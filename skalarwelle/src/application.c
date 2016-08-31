@@ -79,6 +79,6 @@ SkalarwelleApplication *
 skalarwelle_application_new (void)
 {
   return g_object_new (skalarwelle_application_get_type (),
-                       "application-id", "com.github.promi.skalarwelle",
+                       "application-id", APPLICATION_ID,
                        "flags", G_APPLICATION_HANDLES_OPEN, NULL);
 }

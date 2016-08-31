@@ -2,7 +2,7 @@
 
 <schemalist>
 
-  <schema path="/com/github/promi/cmumble/" id="com.github.promi.cmumble">
+  <schema path="/com/github/promi/skalarwelle/" id="com.github.promi.skalarwelle">
 
     <key name='mumble-host' type='s'>
       <default>'mumble.example.com'</default>

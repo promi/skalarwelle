@@ -32,7 +32,7 @@ G_DECLARE_FINAL_TYPE (SkalarwelleConnection, skalarwelle_connection,
 
 SkalarwelleConnection *skalarwelle_connection_new ();
 
-gboolean skalarwelle_connection_connect (SkalarwelleConnection * connection,
+gboolean skalarwelle_connection_connect (SkalarwelleConnection *connection,
                                          const gchar *host_name, guint16 port,
                                          const char *user_name);
 

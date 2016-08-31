@@ -32,7 +32,7 @@ src/connect-dialog.ui
 	glib-compile-resources $(srcdir)/src/resources.xml --target=$@ \
 	--sourcedir=$(srcdir)/src --c-name skalarwelle --generate-source
 
-gsettings_SCHEMAS = src/com.github.promi.cmumble.gschema.xml
+gsettings_SCHEMAS = src/com.github.promi.skalarwelle.gschema.xml
 
 @GSETTINGS_RULES@
 

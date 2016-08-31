@@ -26,6 +26,7 @@ typedef struct _SkalarwelleMainWindow
   GtkApplicationWindow parent;
 
   GtkNotebook *notebook;
+  GSettings *set;
 } SkalarwelleMainWindow;
 
 /* *INDENT-OFF* */
@@ -34,14 +35,19 @@ G_DEFINE_TYPE (SkalarwelleMainWindow, skalarwelle_main_window,
 /* *INDENT-ON* */
 
 static void
-skalarwelle_main_window_init (SkalarwelleMainWindow *skalarwelle_main_window)
+skalarwelle_main_window_init (SkalarwelleMainWindow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (skalarwelle_main_window));
+  self->set = g_settings_new (APPLICATION_ID);
+  g_return_if_fail (self->set != NULL);
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 skalarwelle_main_window_finalize (GObject *object)
 {
+  SkalarwelleMainWindow *self = SKALARWELLE_MAIN_WINDOW (object);
+  g_object_unref (self->set);
+
   G_OBJECT_CLASS (skalarwelle_main_window_parent_class)->finalize (object);
 }
 
@@ -61,10 +67,22 @@ skalarwelle_main_window_class_init (SkalarwelleMainWindowClass *klass)
                                         notebook);
 }
 
+void
+skalarwelle_main_window_connect (SkalarwelleMainWindow *self,
+                                 const gchar *host_name, guint16 port,
+                                 const char *user_name);
+
 SkalarwelleMainWindow *
 skalarwelle_main_window_new (void)
 {
-  return g_object_new (skalarwelle_main_window_get_type (), NULL);
+  SkalarwelleMainWindow *self =
+    g_object_new (skalarwelle_main_window_get_type (), NULL);
+
+  gchar *host_name = g_settings_get_string (self->set, "mumble-host");
+  guint16 port = g_settings_get_int (self->set, "mumble-port");
+  gchar *user_name = g_settings_get_string (self->set, "mumble-user");
+  skalarwelle_main_window_connect (self, host_name, port, user_name);
+  return self;
 }
 
 void

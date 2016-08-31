@@ -26,6 +26,8 @@
 #include <skalarwelle/connection.h>
 #include "connect-dialog.h"
 
+#define APPLICATION_ID "com.github.promi.skalarwelle"
+
 /* *INDENT-OFF* */
 G_BEGIN_DECLS
 #define SKALARWELLE_TYPE_MAIN_WINDOW skalarwelle_main_window_get_type ()

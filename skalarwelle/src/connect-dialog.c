@@ -118,9 +118,8 @@ skalarwelle_connect_dialog_uint_to_str (G_GNUC_UNUSED GBinding *binding,
     {
       const size_t max_length = 100;
       gchar s[max_length];
-      gint length =
-        snprintf (s, max_length, "%" G_GUINT32_FORMAT,
-                  g_value_get_uint (from_value));
+      gint length = snprintf (s, max_length, "%" G_GUINT32_FORMAT,
+                              g_value_get_uint (from_value));
       g_return_val_if_fail (length >= 0 && length < (gint) max_length, FALSE);
       g_value_set_string (to_value, s);
       return TRUE;

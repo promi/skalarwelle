@@ -37,5 +37,7 @@ indent \
   -T SkalarwelleApplicationClass \
   -T SkalarwelleMainWindow \
   -T SkalarwelleMainWindowClass \
+  -T SkalarwelleConnection \
+  -T SkalarwelleConnectionClass \
   -nut "$@"
 
